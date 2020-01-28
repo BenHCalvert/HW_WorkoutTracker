@@ -3,21 +3,60 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const workoutSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: "Enter a name for this workout"
-  },
-  value: {
-    type: Number,
-    required: "Enter an amount"
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  }
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["type", "name", "duration", "weight", "reps", "sets"],
+            properties: {
+                type: {
+                    enum: ["resistance", "stretch", "endurance"],
+                    description: "can only be one of the enum values and is required"
+                },
+                name: {
+                    bsonType: "string",
+                    description: "must be a string and is required"
+                },
+                duration: {
+                    bsonType: "int",
+                    minimum: 0,
+                    description: "must be an integer greater than 0 and is required"
+                },
+                weight: {
+                    bsonType: "int",
+                    minimum: 0,
+                    description: "must be an integer greater than 0 and is required"
+                },
+                reps: {
+                    bsonType: "int",
+                    minimum: 0,
+                    description: "must be an integer greater than 0 and is required"
+                },
+                sets: {
+                    bsonType: "int",
+                    minimum: 0,
+                    description: "must be an integer greater than 0 and is required"
+                }
+            }
+        }
+    }
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);
 
 module.exports = Workout;
+
+// const workoutSchema = new Schema({
+//   name: {
+//     type: String,
+//     trim: true,
+//     required: "Enter a name for this workout"
+//   },
+//   value: {
+//     type: Number,
+//     required: "Enter an amount"
+//   },
+//   date: {
+//     type: Date,
+//     default: Date.now
+//   }
+// });
