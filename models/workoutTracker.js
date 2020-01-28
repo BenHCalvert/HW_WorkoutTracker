@@ -18,22 +18,22 @@ const workoutSchema = new Schema({
                 },
                 duration: {
                     bsonType: "int",
-                    minimum: 0,
+                    minimum: 1,
                     description: "must be an integer greater than 0 and is required"
                 },
                 weight: {
                     bsonType: "int",
-                    minimum: 0,
+                    minimum: 1,
                     description: "must be an integer greater than 0 and is required"
                 },
                 reps: {
                     bsonType: "int",
-                    minimum: 0,
+                    minimum: 1,
                     description: "must be an integer greater than 0 and is required"
                 },
                 sets: {
                     bsonType: "int",
-                    minimum: 0,
+                    minimum: 1,
                     description: "must be an integer greater than 0 and is required"
                 }
             }
