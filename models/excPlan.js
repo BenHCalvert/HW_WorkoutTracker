@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const workoutSchema = new Schema({
+const excPlan = new Schema({
     validator: {
         $jsonSchema: {
             bsonType: "object",
@@ -41,6 +41,6 @@ const workoutSchema = new Schema({
     }
 });
 
-const Workout = mongoose.model("Workout", workoutSchema);
+const ExcPlan = mongoose.model("Workout", excPlan);
 
 module.exports = Workout;

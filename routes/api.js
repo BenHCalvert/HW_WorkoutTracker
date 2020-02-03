@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Workout = require("../models/workoutTracker.js");
 const path = require("path");
 
+// API ROUTES **********************
 router.get("/api/workouts", (req, res) => {
   Workout.find()
     .then(workout => {
@@ -12,15 +13,13 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-// TODO
 router.post("/api/workouts", ({ body }, res) => {
-  Transaction.insertMany(body)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
+  Workout.create({})
+			.then(data => res.json(data))
+			.catch(err => {
+				console.log("err", err)
+				res.json(err)
+			})
 });
 
 router.put("/api/workouts/:id", (req, res) => {
@@ -33,19 +32,15 @@ router.put("/api/workouts/:id", (req, res) => {
     });
 });
 
-// TODO
 router.get("/api/workouts/range", (req, res) => {
-  Transaction.find({})
-    .sort({ date: -1 })
-    .then(dbTransaction => {
-      res.json(dbTransaction);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
+  Workout.find({}, (error, results) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.json(results);
+    }
+  });
 });
-
-// API ROUTES **********************
 
 // HTML ROUTES **********************
 router.get('/', (req, res) => {
